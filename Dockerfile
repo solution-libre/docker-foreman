@@ -44,4 +44,6 @@ COPY foreman-installer-answers.yaml /etc/foreman/
 # Foreman installation
 CMD foreman-installer
 
+EXPOSE 80
 EXPOSE 443
+EXPOSE 8140
