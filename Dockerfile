@@ -24,7 +24,7 @@ RUN set -x \
   && rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc \
   && chmod +x /usr/local/bin/gosu \
   && gosu nobody true \
-  && apt-get purge -y --auto-remove ca-certificates wget
+  && apt-get purge -y --auto-remove wget
 
 # Puppet installation
 RUN set -x \
