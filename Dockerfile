@@ -23,8 +23,7 @@ RUN set -x \
   && gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
   && rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc \
   && chmod +x /usr/local/bin/gosu \
-  && gosu nobody true \
-  && apt-get purge -y --auto-remove wget
+  && gosu nobody true
 
 # Puppet installation
 RUN set -x \
@@ -36,7 +35,8 @@ RUN set -x \
   && echo "deb http://deb.theforeman.org/ stretch 1.16" > /etc/apt/sources.list.d/foreman.list \
   && echo "deb http://deb.theforeman.org/ plugins 1.16" >> /etc/apt/sources.list.d/foreman.list \
   && wget -q https://deb.theforeman.org/pubkey.gpg -O- | apt-key add - \
-  && apt update && apt -y install foreman-installer
+  && apt update && apt -y install foreman-installer \
+  && apt-get purge -y --auto-remove wget
 
 # Pre-configuration
 COPY foreman-installer-answers.yaml /etc/foreman/
