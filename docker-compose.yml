@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  foreman:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      FOREMAN_DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: foreman
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: foreman
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    restart: "always"
+
