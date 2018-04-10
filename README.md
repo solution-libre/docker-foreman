@@ -5,6 +5,7 @@
 1. [Description](#module-description)
 2. [Setup](#setup)
 3. [Usage](#usage)
+4. [Reference](#reference)
 4. [Development](#development)
 5. [Contributors](#contributors)
 
@@ -19,12 +20,22 @@ cd /opt
 git clone https://github.com/solution-libre/docker-foreman.git foreman
 cd foreman
 ```
+
+Update `.env` file.
+
 ## Usage
 
 ```sh
 cd /opt/foreman
 docker-compose up -d
 ```
+## Reference
+
+### Environment variables
+
+#### `DB_PASSWORD`
+
+The database password. Default value: 'postgres\_password'
 
 ## Development
 
