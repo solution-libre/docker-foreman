@@ -7,6 +7,10 @@ services:
       dockerfile: ./Dockerfile
     environment:
       FOREMAN_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./foreman:/etc/foreman
+      - ./foreman-installer:/etc/foreman-installer
+      - ./foreman-proxy:/etc/foreman-proxy
     depends_on:
       - postgres
 
