@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-if [ "$(ls -A config/foreman)" -o "$(ls -A config/foreman-proxy)" ]; then
+if [ "$(ls -A /etc/foreman)" -o "$(ls -A /etc/foreman-proxy)" ]; then
 	foreman-installer
 fi
 
