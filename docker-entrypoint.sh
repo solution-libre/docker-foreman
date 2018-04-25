@@ -1,4 +1,8 @@
 #!/bin/sh
 set -e
 
-foreman-installer
+if [ "$(ls -A config/foreman)" -o "$(ls -A config/foreman-proxy)" ]; then
+	foreman-installer
+fi
+
+exec "bash"
