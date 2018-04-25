@@ -8,9 +8,12 @@ services:
     environment:
       FOREMAN_DB_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./foreman:/etc/foreman
-      - ./foreman-installer:/etc/foreman-installer
-      - ./foreman-proxy:/etc/foreman-proxy
+      - ./config/foreman:/etc/foreman
+      - ./config/foreman-installer:/etc/foreman-installer
+      - ./config/foreman-proxy:/etc/foreman-proxy
+      - ./logs/foreman:/var/log/foreman
+      - ./logs/foreman-installer:/var/log/foreman-installer
+      - ./logs/foreman-proxy:/var/log/foreman-proxy
     depends_on:
       - postgres
 

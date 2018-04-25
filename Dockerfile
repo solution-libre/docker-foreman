@@ -30,13 +30,19 @@ RUN set -ex; \
 # Config volumes
 RUN mkdir /etc/foreman
 VOLUME /etc/foreman
-RUN mkdir /etc/foreman-installer
 VOLUME /etc/foreman-installer
 RUN mkdir /etc/foreman-proxy
 VOLUME /etc/foreman-proxy
 
-# Foreman installation
-CMD foreman-installer
+# Log volumes
+RUN mkdir /var/log/foreman
+VOLUME /var/log/foreman
+VOLUME /var/log/foreman-installer
+RUN mkdir /var/log/foreman-proxy
+VOLUME /var/log/foreman-proxy
+
+COPY docker-entrypoint.sh /usr/local/bin/
+ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 80
 EXPOSE 443
