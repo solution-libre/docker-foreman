@@ -29,6 +29,7 @@ Update `.env` file.
 cd /opt/foreman
 docker-compose up -d
 ```
+
 ## Reference
 
 ### Environment variables
