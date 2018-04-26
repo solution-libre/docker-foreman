@@ -2,6 +2,7 @@
 foreman:
   foreman_url: https://foreman.docker.lan/
   servername: foreman.docker.lan
+  serveraliases:
   - foreman
   custom_repo: true
   db_manage: true
@@ -16,3 +17,6 @@ foreman:
   - puppet
 foreman::plugin::docker: true
 foreman::plugin::setup: {}
+puppet:
+  server: true
+foreman_proxy: true

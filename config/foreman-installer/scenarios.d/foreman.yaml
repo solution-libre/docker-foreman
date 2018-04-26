@@ -1,0 +1,29 @@
+---
+:name: Foreman
+:description: Default installation of Foreman
+:enabled: true
+:log_dir: "/var/log/foreman-installer"
+:store_dir: ''
+:log_name: foreman.log
+:log_level: :debug
+:no_prefix: false
+:mapping: {}
+:answer_file: "/etc/foreman-installer/scenarios.d/foreman-answers.yaml"
+:installer_dir: "/usr/share/foreman-installer"
+:module_dirs: "/usr/share/foreman-installer/modules"
+:colors: 
+:color_of_background: :dark
+:hook_dirs: []
+:custom: {}
+:low_priority_modules:
+- foreman_proxy_plugin
+- foreman_compute
+- foreman_plugin
+:verbose_log_level: info
+:hiera_config: "/usr/share/foreman-installer/config/foreman-hiera.conf"
+:parser_cache_path: "/usr/share/foreman-installer/parser_cache/foreman.yaml"
+:kafo_modules_dir: "/usr/lib/ruby/vendor_ruby/kafo/modules"
+:order:
+- foreman
+- foreman_proxy
+- puppet

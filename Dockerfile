@@ -44,6 +44,8 @@ VOLUME /var/log/foreman-proxy
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
+CMD ["tail", "-f", "/var/log/foreman/production.log"]
+
 EXPOSE 80
 EXPOSE 443
 EXPOSE 8140
