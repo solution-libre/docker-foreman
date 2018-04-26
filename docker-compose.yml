@@ -16,6 +16,8 @@ services:
       - ./logs/foreman-proxy:/var/log/foreman-proxy
     depends_on:
       - postgres
+    domainname: sf.lan
+    hostname: foreman
 
   postgres:
     image: postgres:alpine
