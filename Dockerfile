@@ -5,7 +5,9 @@ RUN set -ex; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
       ca-certificates \
+      cron \
       gnupg \
+      systemd \
       wget; \
     rm -rf /var/lib/apt/lists/*
 
