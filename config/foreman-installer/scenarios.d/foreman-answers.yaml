@@ -14,7 +14,6 @@ foreman:
   db_username: foreman
   db_password: 
   db_sslmode:
-  - puppet
 foreman::plugin::docker: true
 foreman::plugin::setup: {}
 puppet:
