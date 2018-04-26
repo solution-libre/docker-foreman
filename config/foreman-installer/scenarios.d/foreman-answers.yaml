@@ -5,7 +5,7 @@ foreman:
   serveraliases:
   - foreman
   custom_repo: true
-  db_manage: true
+  db_manage: false
   db_type: postgresql
   db_host: postgres
   db_database: foreman
