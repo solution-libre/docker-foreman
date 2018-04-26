@@ -7,13 +7,10 @@ foreman:
   custom_repo: true
   db_manage: true
   db_type: postgresql
-  db_adapter:
-  db_host:
-  db_port:
-  db_database:
+  db_host: postgres
+  db_database: foreman
   db_username: foreman
   db_password: 
-  db_sslmode:
 foreman::plugin::docker: true
 foreman::plugin::setup: {}
 puppet:
