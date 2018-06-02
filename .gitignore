@@ -1,0 +1,5 @@
+config/foreman-installer/scenarios.d/last_scenario.yaml
+config/foreman-proxy/
+config/foreman/
+db/
+logs/
