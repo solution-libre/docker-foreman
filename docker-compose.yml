@@ -7,6 +7,12 @@ services:
       dockerfile: ./Dockerfile
     environment:
       FOREMAN_DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8140:8140"
+    cap_add:
+      - SYS_ADMIN
     volumes:
       - ./config/foreman:/etc/foreman
       - ./config/foreman-installer:/etc/foreman-installer
