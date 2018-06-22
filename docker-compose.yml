@@ -20,6 +20,7 @@ services:
       - ./logs/foreman:/var/log/foreman
       - ./logs/foreman-installer:/var/log/foreman-installer
       - ./logs/foreman-proxy:/var/log/foreman-proxy
+      - /var/run/docker.sock:/var/run/docker.sock
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     depends_on:
       - postgres

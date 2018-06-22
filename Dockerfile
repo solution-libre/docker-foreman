@@ -1,5 +1,7 @@
 FROM debian:stretch
 
+ENV FOREMAN_VERSION="1.16" PATH=/opt/puppetlabs/bin:$PATH
+
 # Dependencies installation
 RUN set -ex; \
     apt-get update; \
@@ -31,20 +33,40 @@ VOLUME [ "/sys/fs/cgroup" ]
 # Puppet installation
 RUN set -ex; \
     wget -O /tmp/puppet5-release-stretch.deb https://apt.puppetlabs.com/puppet5-release-stretch.deb; \
-    dpkg -i /tmp/puppet5-release-stretch.deb && rm /tmp/puppet5-release-stretch.deb
+    dpkg -i /tmp/puppet5-release-stretch.deb; \
+    rm /tmp/puppet5-release-stretch.deb; \
+    apt-get update; \
+    apt-get -y install puppetserver; \
+    rm -rf /var/lib/apt/lists/*
 
 # Foreman-installer installation
 RUN set -ex; \
-    echo "deb http://deb.theforeman.org/ stretch 1.16" > /etc/apt/sources.list.d/foreman.list; \
-    echo "deb http://deb.theforeman.org/ plugins 1.16" >> /etc/apt/sources.list.d/foreman.list; \
+    echo "deb http://deb.theforeman.org/ stretch $FOREMAN_VERSION" > /etc/apt/sources.list.d/foreman.list; \
+    echo "deb http://deb.theforeman.org/ plugins $FOREMAN_VERSION" >> /etc/apt/sources.list.d/foreman.list; \
     wget -q https://deb.theforeman.org/pubkey.gpg -O- | apt-key add -; \
     apt-get update; \
     apt-get -y install foreman-installer; \
     rm -rf /var/lib/apt/lists/*
 
+# Foreman and Foreman-Proxy installations
+COPY config/foreman-installer/scenarios.d/foreman-answers.yaml /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+RUN set -x; \
+    mv /bin/hostname /tmp/; \
+    echo "echo $(facter fqdn)" > /bin/hostname; \
+    chmod +x /bin/hostname; \
+    apt-get update; \
+    foreman-installer; \
+    mv /tmp/hostname /bin/; \
+    rm -rf /var/lib/apt/lists/*
+
 # Dependencies clean-up
 RUN set -ex; \
     apt-get purge -y --auto-remove wget
+
+# Save original configurations
+RUN set -ex; \
+    mv /etc/foreman /etc/foreman.dist; \
+    mv /etc/foreman-proxy /etc/foreman-proxy.dist
 
 # Config volumes
 RUN mkdir /etc/foreman
@@ -54,10 +76,8 @@ RUN mkdir /etc/foreman-proxy
 VOLUME /etc/foreman-proxy
 
 # Log volumes
-RUN mkdir /var/log/foreman
 VOLUME /var/log/foreman
 VOLUME /var/log/foreman-installer
-RUN mkdir /var/log/foreman-proxy
 VOLUME /var/log/foreman-proxy
 
 COPY docker-entrypoint.sh /usr/local/bin/
